@@ -1,0 +1,31 @@
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.login-form input {
+  font-size: 1rem;
+  padding: 0.3rem;
+}
+
+.login-form label {
+  display: block;
+  font-size: 1.2rem;
+}
+
+.login-btn {
+  background-color: #8b9dc3;
+  color: #fff;
+  border: 2px solid #3b5998;
+  font-weight: bold;
+}
+
+.login-error-message {
+  color: red;
+}
