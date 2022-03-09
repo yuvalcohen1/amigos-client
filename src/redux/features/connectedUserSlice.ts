@@ -1,7 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserModel } from "../../models/User.model";
 import type { RootState } from "../app/store";
-import { fetchUserDetailsAndSetJwtCookieByLogin } from "../thunks/connectedUser-thunks";
+import {
+  fetchUserDetailsAndSetJwtCookieByLogin,
+  resetConnectedUserAndDeleteJwtCookie,
+} from "../thunks/connectedUser-thunks";
 
 interface ConnectedUserState {
   value: UserModel | null;
@@ -10,17 +13,6 @@ interface ConnectedUserState {
   errorMessage: string;
 }
 
-// {
-//   email: "",
-//   encryptedPassword: "",
-//   birthday: new Date(),
-//   firstName: "yuval",
-//   lastName: "cohen",
-//   isAdmin: 0,
-//   profileImg:
-//     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDv94lhq4g5u-kKZvmR_zxMJOHDuViXaN0bg&usqp=CAU",
-//   _id: "",
-// },
 const initialState: ConnectedUserState = {
   value: null,
   status: "idle",
@@ -54,11 +46,31 @@ export const connectedUserSlice = createSlice({
           state.statusCode = action.payload.status;
           state.errorMessage = action.payload.data;
         }
+      )
+      .addCase(resetConnectedUserAndDeleteJwtCookie.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(
+        resetConnectedUserAndDeleteJwtCookie.fulfilled,
+        (state, action) => {
+          state.status = "idle";
+          state.statusCode = 200;
+          state.value = null;
+          state.errorMessage = "";
+        }
+      )
+      .addCase(
+        resetConnectedUserAndDeleteJwtCookie.rejected,
+        (state, action: PayloadAction<any>) => {
+          state.status = "failed";
+          state.statusCode = action.payload.status;
+          state.errorMessage = action.payload.data;
+        }
       );
   },
 });
 
-// export const {} = connectedUserSlice.actions;
+// export const {  } = connectedUserSlice.actions;
 
 export const selectConnectedUser = (state: RootState) => state.connectedUser;
 

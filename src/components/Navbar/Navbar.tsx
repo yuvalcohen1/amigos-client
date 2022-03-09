@@ -1,15 +1,22 @@
 import { faBell, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { useAppSelector } from "../../redux/app/hooks";
+import React, { useCallback } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
 import { selectConnectedUser } from "../../redux/features/connectedUserSlice";
+import { resetConnectedUserAndDeleteJwtCookie } from "../../redux/thunks/connectedUser-thunks";
 import LoginForm from "../LoginForm/LoginForm";
 import "./Navbar.css";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
-  const { value: connectedUser, status } = useAppSelector(selectConnectedUser);
+  const { value: connectedUser } = useAppSelector(selectConnectedUser);
+
+  const dispatch = useAppDispatch();
+
+  const handleLogout = useCallback(() => {
+    dispatch(resetConnectedUserAndDeleteJwtCookie());
+  }, [dispatch]);
 
   return (
     <div className="navbar">
@@ -50,7 +57,9 @@ const Navbar = (props: Props) => {
             </button>
           </div>
 
-          <button className="logout-btn">Logout</button>
+          <button className="logout-btn" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       )}
     </div>

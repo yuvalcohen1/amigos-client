@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useEffect, useState } from "react";
+import React, { FormEvent, useCallback, useState } from "react";
 import { useAppDispatch } from "../../redux/app/hooks";
 import { fetchUserDetailsAndSetJwtCookieByLogin } from "../../redux/thunks/connectedUser-thunks";
 import "./LoginForm.css";
@@ -14,10 +14,6 @@ const LoginForm = (props: Props) => {
   const dispatch = useAppDispatch();
   //   const { status: connectedUserStatus, errorMessage } =
   //     useAppSelector(selectConnectedUser);
-
-  useEffect(() => {
-    console.log(loginValues);
-  }, [loginValues]);
 
   const handleLogin = useCallback(
     (e: FormEvent) => {

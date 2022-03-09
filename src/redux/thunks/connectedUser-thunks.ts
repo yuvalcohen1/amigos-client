@@ -26,3 +26,20 @@ export const fetchUserDetailsAndSetJwtCookieByLogin = createAsyncThunk<
     }
   }
 );
+
+export const resetConnectedUserAndDeleteJwtCookie = createAsyncThunk(
+  "connectedUser/resetConnectedUserAndDeleteJwtCookie",
+  async (_, thunkApi) => {
+    try {
+      await api.post("/delete-token-cookie", {}, {
+        withCredentials: true,
+      });
+
+      localStorage.setItem("connectedUser", JSON.stringify(null));
+
+      return;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
