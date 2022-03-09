@@ -1,26 +1,7 @@
 .navbar {
   height: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: #4267b2;
   color: #fff;
-}
-
-.navbar-left {
-  height: 100%;
-  width: 30vw;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.navbar-right {
-  height: 100%;
-  width: 20vw;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
 }
 
 .logo {
@@ -28,64 +9,3 @@
   font-size: 2rem;
 }
 
-.search-profiles-container {
-  height: 35%;
-}
-
-.search-profiles-input {
-  height: 100%;
-  border: none;
-  border-radius: 10px;
-  margin-right: 0.2vw;
-  padding: 0.2rem 0.5rem;
-}
-
-.search-profiles-btn {
-  height: 117%;
-  font-size: 1rem;
-  border-radius: 30%;
-  border: none;
-  background-color: #fff;
-}
-
-.move-to-personal-profile-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  height: 100%;
-  width: 5vw;
-}
-
-.profile-img {
-  width: 40%;
-  border-radius: 50%;
-}
-
-.navbar-right .notifications-btn {
-  height: fit-content;
-  padding: 0.5rem;
-  border-radius: 50%;
-}
-
-.navbar-right button {
-  margin: 0.3rem;
-  border: none;
-  border-radius: 5%;
-  font-size: 1rem;
-  background-color: #fff;
-}
-
-.navbar-right .logout-btn {
-  font-size: 1.5rem;
-  height: 50%;
-}
-
-.notifications-icon {
-  font-size: 1.5rem;
-}
-
-.profile-and-notifications {
-  display: flex;
-  align-items: center;
-  height: 50%;
-}

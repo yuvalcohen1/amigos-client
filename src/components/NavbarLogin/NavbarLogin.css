@@ -1,0 +1,28 @@
+.navbar-login {
+  width: 50vw;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@media (max-width: 1300px) {
+  .navbar-login {
+    width: 65vw;
+  }
+}
+
+@media (max-width: 970px) {
+  .navbar-login {
+    width: 95vw;
+  }
+}
+
+@media (max-width: 670px) {
+  .navbar-login {
+    width: 100vw;
+    height: 250px;
+    background-color: #4267b2;
+    flex-direction: column;
+  }
+}
