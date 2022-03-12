@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { RegisterBodyModel } from "../../models/RegisterBody.model";
 import { RegisterValuesModel } from "../../models/RegisterValues.model";
 import { useAppDispatch } from "../../redux/app/hooks";
@@ -19,6 +20,7 @@ const RegisterForm = (props: Props) => {
   });
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (event: any) => {
     const form = event.currentTarget;
@@ -37,6 +39,8 @@ const RegisterForm = (props: Props) => {
       };
 
       dispatch(register(registerBody));
+
+      navigate("/feed");
     }
 
     setValidated(true);

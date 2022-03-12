@@ -1,4 +1,5 @@
 import React, { FormEvent, useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/app/hooks";
 import { fetchUserDetailsAndSetJwtCookieByLogin } from "../../redux/thunks/connectedUser-thunks";
 import "./LoginForm.css";
@@ -13,11 +14,15 @@ const LoginForm = (props: Props) => {
 
   const dispatch = useAppDispatch();
 
+  const navigate = useNavigate();
+
   const handleLogin = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
 
       dispatch(fetchUserDetailsAndSetJwtCookieByLogin(loginValues));
+
+      navigate("/feed");
     },
     [loginValues, dispatch]
   );
