@@ -24,7 +24,14 @@ const initialState: ConnectedUserState = {
 export const connectedUserSlice = createSlice({
   name: "connectedUser",
   initialState,
-  reducers: {},
+  reducers: {
+    getConnectedUserSync: (state, action) => {
+      state.value = action.payload;
+      state.status = "idle";
+      state.statusCode = 200;
+      state.errorMessage = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserDetailsAndSetJwtCookieByLogin.pending, (state) => {
@@ -86,7 +93,7 @@ export const connectedUserSlice = createSlice({
   },
 });
 
-// export const {  } = connectedUserSlice.actions;
+export const { getConnectedUserSync } = connectedUserSlice.actions;
 
 export const selectConnectedUser = (state: RootState) => state.connectedUser;
 

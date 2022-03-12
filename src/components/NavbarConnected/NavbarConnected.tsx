@@ -1,6 +1,7 @@
 import { faBell, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
 import { selectConnectedUser } from "../../redux/features/connectedUserSlice";
 import { resetConnectedUserAndDeleteJwtCookie } from "../../redux/thunks/connectedUser-thunks";
@@ -12,10 +13,12 @@ const NavbarConnected = (props: Props) => {
   const { value: connectedUser } = useAppSelector(selectConnectedUser);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const handleLogout = useCallback(() => {
-    dispatch(resetConnectedUserAndDeleteJwtCookie());
-  }, [dispatch]);
+  const handleLogout = useCallback(async () => {
+    await dispatch(resetConnectedUserAndDeleteJwtCookie());
+    navigate("/");
+  }, [dispatch, navigate]);
 
   return (
     <div className="navbar-connected">
