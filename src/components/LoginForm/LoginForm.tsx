@@ -12,8 +12,6 @@ const LoginForm = (props: Props) => {
   });
 
   const dispatch = useAppDispatch();
-  //   const { status: connectedUserStatus, errorMessage } =
-  //     useAppSelector(selectConnectedUser);
 
   const handleLogin = useCallback(
     (e: FormEvent) => {

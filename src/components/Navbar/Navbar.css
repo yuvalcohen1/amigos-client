@@ -2,10 +2,13 @@
   height: 100px;
   background-color: #4267b2;
   color: #fff;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
 }
 
 .logo {
   font-weight: bold;
   font-size: 2rem;
 }
-

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { LoginValuesModel } from "../../models/LoginValues.model";
+import { RegisterBodyModel } from "../../models/RegisterBody.model";
 import { UserModel } from "../../models/User.model";
 
 const api = axios.create({
@@ -31,13 +32,35 @@ export const resetConnectedUserAndDeleteJwtCookie = createAsyncThunk(
   "connectedUser/resetConnectedUserAndDeleteJwtCookie",
   async (_, thunkApi) => {
     try {
-      await api.post("/delete-token-cookie", {}, {
-        withCredentials: true,
-      });
+      await api.post(
+        "/delete-token-cookie",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
 
       localStorage.setItem("connectedUser", JSON.stringify(null));
 
       return;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
+export const register = createAsyncThunk<UserModel, RegisterBodyModel>(
+  "connectedUser/register",
+  async (registerValues: RegisterBodyModel, thunkApi) => {
+    try {
+      const { data: user } = await api.post<UserModel>(
+        "/register",
+        registerValues
+      );
+
+      localStorage.setItem("connectedUser", JSON.stringify(user));
+
+      return user;
     } catch (error: any) {
       return thunkApi.rejectWithValue(error.response);
     }

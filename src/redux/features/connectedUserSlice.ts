@@ -3,6 +3,7 @@ import { UserModel } from "../../models/User.model";
 import type { RootState } from "../app/store";
 import {
   fetchUserDetailsAndSetJwtCookieByLogin,
+  register,
   resetConnectedUserAndDeleteJwtCookie,
 } from "../thunks/connectedUser-thunks";
 
@@ -47,6 +48,21 @@ export const connectedUserSlice = createSlice({
           state.errorMessage = action.payload.data;
         }
       )
+      .addCase(register.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.statusCode = 200;
+        state.value = action.payload;
+        state.errorMessage = "";
+      })
+      .addCase(register.rejected, (state, action: PayloadAction<any>) => {
+        state.status = "failed";
+        state.value = null;
+        state.statusCode = action.payload.status;
+        state.errorMessage = action.payload.data;
+      })
       .addCase(resetConnectedUserAndDeleteJwtCookie.pending, (state) => {
         state.status = "loading";
       })
