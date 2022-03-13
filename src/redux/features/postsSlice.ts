@@ -1,17 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PostModel } from "../../models/Post.model";
 import type { RootState } from "../app/store";
-import { createPost } from "../thunks/posts-thunks";
+import { createPost, fetchAllPosts } from "../thunks/posts-thunks";
 
 interface PostsState {
-  value: PostModel[];
+  allPosts: PostModel[];
+  personalPosts: PostModel[];
   status: "idle" | "loading" | "failed";
   statusCode: number;
   errorMessage: string;
 }
 
 const initialState: PostsState = {
-  value: [],
+  allPosts: [],
+  personalPosts: [],
   status: "idle",
   statusCode: 200,
   errorMessage: "",
@@ -29,12 +31,30 @@ export const postsSlice = createSlice({
       .addCase(createPost.fulfilled, (state, action) => {
         state.status = "idle";
         state.statusCode = 200;
-        state.value.push(action.payload);
+        state.allPosts.push(action.payload);
+        state.personalPosts.push(action.payload);
         state.errorMessage = "";
       })
       .addCase(createPost.rejected, (state, action: PayloadAction<any>) => {
         state.status = "failed";
-        state.value = [];
+        state.allPosts = [];
+        state.personalPosts = [];
+        state.statusCode = action.payload.status;
+        state.errorMessage = action.payload.data;
+      })
+      .addCase(fetchAllPosts.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchAllPosts.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.statusCode = 200;
+        state.allPosts = action.payload;
+        state.errorMessage = "";
+      })
+      .addCase(fetchAllPosts.rejected, (state, action: PayloadAction<any>) => {
+        state.status = "failed";
+        state.allPosts = [];
+        state.personalPosts = [];
         state.statusCode = action.payload.status;
         state.errorMessage = action.payload.data;
       });

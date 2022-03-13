@@ -55,7 +55,8 @@ export const register = createAsyncThunk<UserModel, RegisterBodyModel>(
     try {
       const { data: user } = await api.post<UserModel>(
         "/register",
-        registerValues
+        registerValues,
+        { withCredentials: true }
       );
 
       localStorage.setItem("connectedUser", JSON.stringify(user));
