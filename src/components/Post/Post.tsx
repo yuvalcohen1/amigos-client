@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { Card } from "react-bootstrap";
 import { PostModel } from "../../models/Post.model";
 import "./Post.css";
 
@@ -9,14 +8,10 @@ interface Props {
 
 const Post: FC<Props> = ({ post }) => {
   return (
-    <Card style={{ width: "18rem" }} className="post">
-      <Card.Body>
-        <Card.Text>{post.content}</Card.Text>
-      </Card.Body>
-      {post.attachedPhoto && (
-        <Card.Img variant="top" src={post.attachedPhoto} />
-      )}
-    </Card>
+    <div className="post">
+      <div className="post-content">{post.content}</div>
+      {post.attachedPhoto && <img src={post.attachedPhoto} alt="" />}
+    </div>
   );
 };
 
