@@ -1,7 +1,0 @@
-.register-error {
-  display: none;
-}
-
-.register-form input:invalid ~ .register-error {
-  display: block;
-}

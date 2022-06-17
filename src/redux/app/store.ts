@@ -1,12 +1,7 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import connectedUserReducer from "../features/connectedUserSlice";
-import postsReducer from "../features/postsSlice";
+import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 
 export const store = configureStore({
-  reducer: {
-    connectedUser: connectedUserReducer,
-    posts: postsReducer,
-  },
+  reducer: {},
 });
 
 export type AppDispatch = typeof store.dispatch;
