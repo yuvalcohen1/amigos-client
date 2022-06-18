@@ -8,14 +8,14 @@ import { useAppSelector } from "./redux/app/hooks";
 import { selectUser } from "./redux/slices/userSlice";
 
 const App: FC = () => {
-  const user = useAppSelector(selectUser);
+  const { value: user } = useAppSelector(selectUser);
 
   return (
     <div className="App">
       <Routes>
         {!user && <Route path="/sign-in" element={<SignInPage />} />}
         {!user && <Route path="/sign-up" element={<SignUpPage />} />}
-        {user && <Route path="/my-profile" element={<MyProfilePage />} />}
+        <Route path="/my-profile" element={<MyProfilePage />} />
       </Routes>
     </div>
   );
