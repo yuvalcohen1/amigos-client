@@ -7,12 +7,12 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { FormEvent } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import Copyright from "../../components/Copyright/Copyright";
 import { handleSignIn } from "./helpers";
 import "./SignInPage.css";
@@ -82,14 +82,10 @@ export default function SignInPage() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+                <Link to="#">Forgot password?</Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+                <Link to="/sign-up">{"Don't have an account? Sign Up"}</Link>
               </Grid>
             </Grid>
           </Box>
